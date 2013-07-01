@@ -33,17 +33,27 @@ print "took", time.time() - t
 print "generating squares"
 
 @jit('void()')
+def generate_squares_niave():
+    for i in range(0, 5*50, 50):
+        for j in range(180 + i, 230 + i):
+            for k in range(10 + i, 60 + i):
+                image[j, k] = 1
+        for j in range(230 + i, 280 + i):
+            for k in range(60 + i, 110 + i):
+                image[j, k] = 1
+
+
 def generate_squares():
-    print 'inner type', typeof(image)
     for i in range(0, 5*50, 50):
         image[180 + i:230 + i, 10 + i:60 + i] = 1
         image[230 + i:280 + i, 60 + i:110 + i] = 1
 
-
 t = time.time()
-print 'outer type',
-print typeof(image)
-generate_squares()
+
+if int(arg1) > 1:
+    generate_squares()
+else:
+    generate_squares_niave()
 
 print "took", time.time() - t
 
