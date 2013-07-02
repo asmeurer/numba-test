@@ -7,3 +7,4 @@
 - Unpacking (`i, j = stuff` does not work, `i = stuff[0]; j = stuff[1]` does
   work)
 - `a = b = c` does not work (considered unpacking).
+- Numba doesn't correctly change the type info from int to bool (see test2.py)
