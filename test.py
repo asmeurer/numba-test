@@ -60,7 +60,12 @@ print "took", time.time() - t
 print "finding corners"
 t = time.time()
 coords = corner_peaks(corner_harris(image), min_distance=5)
-coords_subpix = corner_subpix(image, coords, window_size=13)
+print "took", time.time() - t
+
+print "getting subpix"
+t = time.time()
+
+coords_subpix = corner_subpix(image, coords, 13, 0.99)
 
 print "took", time.time() - t
 
