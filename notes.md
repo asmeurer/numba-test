@@ -8,3 +8,4 @@
   work)
 - `a = b = c` does not work (considered unpacking).
 - Numba doesn't correctly change the type info from int to bool (see test2.py)
+- `jit`ed functions cannot be defined out of order
