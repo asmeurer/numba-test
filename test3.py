@@ -9,7 +9,6 @@ def f(x):
     acc = 0
     i = 0
     for elem in x:
-        acc += elem*i
         i += 1
     return acc
 
