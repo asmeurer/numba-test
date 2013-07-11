@@ -1,28 +1,45 @@
 #!/usr/bin/env python
+from __future__ import division
+
 import time
 import math
 from numba import autojit
-import numpy as np
 
 def sqrt_test(N):
     ans = 0
-    A = np.arange(N)
-    for i in A:
+    for i in range(N):
         ans = math.sqrt(i + ans)
 
-sqrt_test_numba = autojit(sqrt_test)
+def log_test(N):
+    ans = 1
+    for i in range(N):
+        ans = math.log(i + ans)
+
+def exp_test(N):
+    ans = 0
+    for i in range(N):
+        ans = math.exp(i/100) + ans
 
 def main():
     N = 10000
-    print 'sqrt python: ',
-    t = time.time()
-    sqrt_test(N)
-    print time.time() - t
 
-    print 'sqrt numba: ',
-    t = time.time()
-    sqrt_test_numba(N)
-    print time.time() - t
+    for name in [
+        #'sqrt',
+        #'log',
+        'exp',
+    ]:
+        print '%s python: ' % name,
+        func = globals()[name + '_test']
+        t = time.time()
+        func(N)
+        print time.time() - t
+
+        print '%s numba: ' % name,
+        func = autojit(func)
+        t = time.time()
+        func(N)
+        print time.time() - t
+
 
 if __name__ == '__main__':
     main()
